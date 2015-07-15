@@ -8,6 +8,7 @@ namespace TradesDataViewer.Watcher
 {
     using System;
     using System.ComponentModel.Composition;
+    using System.Configuration;
 
     using Microsoft.Practices.Prism.Mvvm;
 
@@ -24,8 +25,8 @@ namespace TradesDataViewer.Watcher
         /// <summary>Initializes a new instance of the <see cref="WatcherSettings"/> class.</summary>
         public WatcherSettings()
         {
-            this.Directory = @"C:\trades";
-            this.Interval = TimeSpan.FromSeconds(30);
+            this.Directory = ConfigurationManager.AppSettings["Watcher.Directory"] ?? @"C:\trades";
+            this.Interval = TimeSpan.Parse(ConfigurationManager.AppSettings["Watcher.Interval"] ?? "00:00:05");
         }
 
         /// <summary>Gets or sets the directory.</summary>
