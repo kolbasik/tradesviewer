@@ -10,17 +10,17 @@
             <ColumnDefinition Width="80*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="25" />
+            <RowDefinition MaxHeight="30" />
             <RowDefinition Height="5" />
-            <RowDefinition MaxHeight="25" />
+            <RowDefinition MaxHeight="30" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Directory:" />
-        <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=Settings.Directory}" />
+        <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Text="Directory:" />
+        <TextBox Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=Settings.Directory}" />
 
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Interval:" />
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=Settings.Interval}" />
+        <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Text="Interval:" />
+        <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Text="{Binding Path=Settings.Interval}" />
 
     </Grid>
 </UserControl>

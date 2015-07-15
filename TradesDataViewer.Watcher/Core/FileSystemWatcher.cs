@@ -28,8 +28,19 @@ namespace TradesDataViewer.Watcher.Core
         /// <summary>Gets or sets the directory.</summary>
         public string Directory
         {
-            get { return this.directory; }
-            set { this.directory = value; this.files.Clear(); }
+            get
+            {
+                return this.directory;
+            }
+
+            set
+            {
+                if (this.directory != value)
+                {
+                    this.directory = value; 
+                    this.files.Clear();
+                }
+            }
         }
 
         /// <summary>Gets the newest files.</summary>
