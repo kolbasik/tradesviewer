@@ -12,7 +12,8 @@ namespace TradesDataViewer.Watcher.Core
     /// <summary>The polling timer.</summary>
     internal class PollingTimer : IDisposable
     {
-        /// <summary>The timer.</summary>
+        private readonly Action action;
+
         private readonly Timer timer;
 
         /// <summary>
@@ -21,9 +22,9 @@ namespace TradesDataViewer.Watcher.Core
         /// <param name="action">The action.</param>
         public PollingTimer(Action action)
         {
+            this.action = action;
             this.timer = new Timer(TimeSpan.FromMinutes(1).TotalMilliseconds);
-            this.timer.Elapsed += delegate { action(); };
-            this.timer.Start();
+            this.timer.Elapsed += delegate { this.action(); };
         }
 
         /// <summary>Gets or sets the interval.</summary>
@@ -31,6 +32,13 @@ namespace TradesDataViewer.Watcher.Core
         {
             get { return TimeSpan.FromMilliseconds(this.timer.Interval); }
             set { this.timer.Interval = value.TotalMilliseconds; }
+        }
+
+        /// <summary>Starts the polling.</summary>
+        public void Start()
+        {
+            this.action();
+            this.timer.Start();
         }
 
         /// <summary>The dispose.</summary>

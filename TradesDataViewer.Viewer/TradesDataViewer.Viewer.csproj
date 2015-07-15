@@ -81,15 +81,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="TradesDataViewerView.xaml">
+    <Page Include="ViewerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="TradesDataViewerView.xaml.cs">
-      <DependentUpon>TradesDataViewerView.xaml</DependentUpon>
+    <Compile Include="ViewerView.xaml.cs">
+      <DependentUpon>ViewerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TradesDataViewerModule.cs" />
-    <Compile Include="TradesDataViewerViewModel.cs" />
+    <Compile Include="ViewerModule.cs" />
+    <Compile Include="ViewerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

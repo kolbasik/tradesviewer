@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <summary>
-//   The system directory watcher.
+//   The file system watcher.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -10,7 +10,7 @@ namespace TradesDataViewer.Watcher.Core
 
     using XDirectory = System.IO.Directory;
 
-    /// <summary>The system watcher.</summary>
+    /// <summary>The file system watcher.</summary>
     internal class FileSystemWatcher
     {
         private readonly HashSet<string> files;

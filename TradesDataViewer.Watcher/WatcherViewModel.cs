@@ -14,11 +14,11 @@ namespace TradesDataViewer.Watcher
 
     /// <summary>The system watcher view model.</summary>
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public class SystemWatcherViewModel : BindableBase, IDisposable
+    public class WatcherViewModel : BindableBase, IDisposable
     {
-        /// <summary>Initializes a new instance of the <see cref="SystemWatcherViewModel"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="WatcherViewModel"/> class.</summary>
         [ImportingConstructor]
-        public SystemWatcherViewModel(SystemWatcherService service, SystemWatcherSettings settings)
+        public WatcherViewModel(WatcherService service, WatcherSettings settings)
         {
             this.Service = service;
             this.Settings = settings;
@@ -31,9 +31,9 @@ namespace TradesDataViewer.Watcher
             this.Settings.PropertyChanged -= this.OnSettingsChanged;
         }
 
-        public SystemWatcherService Service { get; private set; }
+        public WatcherService Service { get; private set; }
 
-        public SystemWatcherSettings Settings { get; private set; }
+        public WatcherSettings Settings { get; private set; }
 
         private void OnSettingsChanged(object sender, PropertyChangedEventArgs args)
         {

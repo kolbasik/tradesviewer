@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <summary>
-//   The trades data viewer.
+//   The viewer view model.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -17,22 +17,22 @@ namespace TradesDataViewer.Viewer
 
     /// <summary>The trades data viewer view model.</summary>
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public class TradesDataViewerViewModel : BindableBase, IDisposable
+    public class ViewerViewModel : BindableBase, IDisposable
     {
         /// <summary>The token.</summary>
         private readonly SubscriptionToken token;
 
-        /// <summary>Initializes a new instance of the <see cref="TradesDataViewerViewModel"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="ViewerViewModel"/> class.</summary>
         /// <param name="application">The application.</param>
         [ImportingConstructor]
-        public TradesDataViewerViewModel(IApplicationRoot application)
+        public ViewerViewModel(IApplicationRoot application)
         {
-            this.TradeDataItems = new ObservableCollection<TradeData>();
+            this.Trades = new ObservableCollection<TradeData>();
             this.token = application.TradeDataPushedChannel.Subscribe(this.HandleTradeDataPushedEvent, ThreadOption.UIThread);
         }
 
         /// <summary>Gets the trade data items.</summary>
-        public ObservableCollection<TradeData> TradeDataItems { get; private set; }
+        public ObservableCollection<TradeData> Trades { get; private set; }
 
         /// <summary>The dispose.</summary>
         public void Dispose()
@@ -46,7 +46,7 @@ namespace TradesDataViewer.Viewer
         {
             foreach (var trade in trades)
             {
-                this.TradeDataItems.Add(trade);
+                this.Trades.Add(trade);
             }
         }
     }

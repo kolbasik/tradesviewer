@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <summary>
-//   Interaction logic for TradesDataViewerView.xaml
+//   Interaction logic for ViewerView.xaml
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -12,14 +12,14 @@ namespace TradesDataViewer.Viewer
     using Microsoft.Practices.Prism.Mvvm;
 
     /// <summary>
-    ///     Interaction logic for TradesDataViewer.xaml
+    ///     Interaction logic for ViewerView.xaml
     /// </summary>
     [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public partial class TradesDataViewerView : UserControl, IView
+    public partial class ViewerView : UserControl, IView
     {
-        /// <summary>Initializes a new instance of the <see cref="TradesDataViewerView"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="ViewerView"/> class.</summary>
         [ImportingConstructor]
-        public TradesDataViewerView(TradesDataViewerViewModel viewModel)
+        public ViewerView(ViewerViewModel viewModel)
         {
             this.InitializeComponent();
             this.DataContext = viewModel;

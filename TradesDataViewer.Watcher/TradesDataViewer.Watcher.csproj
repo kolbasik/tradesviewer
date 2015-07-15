@@ -79,15 +79,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\FileSystemWatcher.cs" />
-    <Compile Include="SystemWatcherModule.cs" />
+    <Compile Include="WatcherModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\PollingTimer.cs" />
-    <Compile Include="SystemWatcherService.cs" />
-    <Compile Include="SystemWatcherSettings.cs" />
-    <Compile Include="SystemWatcherView.xaml.cs">
-      <DependentUpon>SystemWatcherView.xaml</DependentUpon>
+    <Compile Include="WatcherService.cs" />
+    <Compile Include="WatcherSettings.cs" />
+    <Compile Include="WatcherView.xaml.cs">
+      <DependentUpon>WatcherView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SystemWatcherViewModel.cs" />
+    <Compile Include="WatcherViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -100,7 +100,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="SystemWatcherView.xaml">
+    <Page Include="WatcherView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

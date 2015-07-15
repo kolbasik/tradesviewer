@@ -1,6 +1,6 @@
 // --------------------------------------------------------------------------------------------------------------------
 // <summary>
-//   The system watcher service.
+//   The watcher service.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -8,18 +8,18 @@ namespace TradesDataViewer.Watcher
 {
     using System;
     using System.ComponentModel.Composition;
-    using System.IO;
     using System.Linq;
     using System.Threading;
 
     using TradesDataViewer.Contracts;
     using TradesDataViewer.Watcher.Core;
 
-    using FileSystemWatcher = TradesDataViewer.Watcher.Core.FileSystemWatcher;
+    using XPath = System.IO.Path;
+    using XFile = System.IO.File;
 
-    /// <summary>The system watcher service.</summary>
-    [Export, PartCreationPolicy(CreationPolicy.NonShared)]
-    public class SystemWatcherService
+    /// <summary>The watcher service.</summary>
+    [Export, PartCreationPolicy(CreationPolicy.Shared)]
+    public class WatcherService
     {
         /// <summary>The application.</summary>
         private readonly IApplicationRoot application;
@@ -27,11 +27,11 @@ namespace TradesDataViewer.Watcher
         /// <summary>The loader manager.</summary>
         private readonly ITradeDataLoaderManager loaderManager;
 
-        /// <summary>Initializes a new instance of the <see cref="SystemWatcherService"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="WatcherService"/> class.</summary>
         /// <param name="application">The application.</param>
         /// <param name="loaderManager">The loader manager.</param>
         [ImportingConstructor]
-        public SystemWatcherService(IApplicationRoot application, ITradeDataLoaderManager loaderManager)
+        public WatcherService(IApplicationRoot application, ITradeDataLoaderManager loaderManager)
         {
             this.application = application;
             this.loaderManager = loaderManager;
@@ -45,6 +45,12 @@ namespace TradesDataViewer.Watcher
 
         /// <summary>Gets the timer.</summary>
         internal PollingTimer Timer { get; private set; }
+
+        /// <summary>Starts</summary>
+        public void Start()
+        {
+            this.Timer.Start();
+        }
 
         /// <summary>The change settings.</summary>
         /// <param name="directory">The directory.</param>
@@ -65,10 +71,10 @@ namespace TradesDataViewer.Watcher
 
         private void HandleFile(string file)
         {
-            var loader = this.loaderManager.GetTradeDataLoader(Path.GetExtension(file));
+            var loader = this.loaderManager.GetTradeDataLoader(XPath.GetExtension(file));
             if (loader != null)
             {
-                using (var stream = File.OpenRead(file))
+                using (var stream = XFile.OpenRead(file))
                 {
                     var trades = loader.Read(stream).ToArray();
                     var channel = this.application.TradeDataPushedChannel;

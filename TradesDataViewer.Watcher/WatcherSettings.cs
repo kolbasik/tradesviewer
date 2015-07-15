@@ -1,6 +1,6 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <summary>
-//   The system watcher settings.
+//   The watcher settings.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
@@ -11,9 +11,9 @@ namespace TradesDataViewer.Watcher
 
     using Microsoft.Practices.Prism.Mvvm;
 
-    /// <summary>The system watcher settings.</summary>
+    /// <summary>The watcher settings.</summary>
     [Export, PartCreationPolicy(CreationPolicy.Shared)]
-    public class SystemWatcherSettings : BindableBase
+    public class WatcherSettings : BindableBase
     {
         /// <summary>The directory.</summary>
         private string directory;
@@ -21,8 +21,8 @@ namespace TradesDataViewer.Watcher
         /// <summary>The interval.</summary>
         private TimeSpan interval;
 
-        /// <summary>Initializes a new instance of the <see cref="SystemWatcherSettings"/> class.</summary>
-        public SystemWatcherSettings()
+        /// <summary>Initializes a new instance of the <see cref="WatcherSettings"/> class.</summary>
+        public WatcherSettings()
         {
             this.Directory = @"C:\trades";
             this.Interval = TimeSpan.FromSeconds(30);

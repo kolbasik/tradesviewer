@@ -1,33 +1,33 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
 // <summary>
-//   The system watcher module.
+//   The viewer module.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TradesDataViewer.Watcher
+namespace TradesDataViewer.Viewer
 {
     using System.ComponentModel.Composition;
+
+    using global::TradesDataViewer.Contracts;
 
     using Microsoft.Practices.Prism.MefExtensions.Modularity;
     using Microsoft.Practices.Prism.Modularity;
     using Microsoft.Practices.Prism.Regions;
 
-    using TradesDataViewer.Contracts;
-
-    [ModuleExport("SystemWatcherModule", typeof(IModule))]
-    public class SystemWatcherModule : IModule
+    [ModuleExport("ViewerModule", typeof(IModule))]
+    public class ViewerModule : IModule
     {
         private readonly IApplicationRoot application;
 
         [ImportingConstructor]
-        public SystemWatcherModule(IApplicationRoot application)
+        public ViewerModule(IApplicationRoot application)
         {
             this.application = application;
         }
 
         public void Initialize()
         {
-            this.application.Prism.RegionManager.RegisterViewWithRegion("AsideRegion", typeof(SystemWatcherView));
+            this.application.Prism.RegionManager.RegisterViewWithRegion("ContentRegion", typeof(ViewerView));
         }
     }
 }

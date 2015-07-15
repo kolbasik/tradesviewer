@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="TradesDataViewer.Viewer.ViewerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             
+             mc:Ignorable="d" d:DesignHeight="300" d:DesignWidth="300">
+  <DataGrid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+            ItemsSource="{Binding Trades}" AutoGenerateColumns="False" IsReadOnly="True" GridLinesVisibility="Horizontal"
+            CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" CanUserResizeRows="False">
+    <DataGrid.Columns>
+      <DataGridTextColumn Header="Date" Binding="{Binding Path=Date, StringFormat='yyyy-MM-dd'}" />
+      <DataGridTextColumn Header="Open" Binding="{Binding Path=Open, StringFormat='F'}">
+        <DataGridTextColumn.ElementStyle>
+          <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+          </Style>
+        </DataGridTextColumn.ElementStyle>
+      </DataGridTextColumn>
+      <DataGridTextColumn Header="High" Binding="{Binding Path=High, StringFormat='F'}">
+        <DataGridTextColumn.ElementStyle>
+          <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+          </Style>
+        </DataGridTextColumn.ElementStyle>
+      </DataGridTextColumn>
+      <DataGridTextColumn Header="Low" Binding="{Binding Path=Low, StringFormat='F'}">
+        <DataGridTextColumn.ElementStyle>
+          <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+          </Style>
+        </DataGridTextColumn.ElementStyle>
+      </DataGridTextColumn>
+      <DataGridTextColumn Header="Close" Binding="{Binding Path=Close, StringFormat='F'}">
+        <DataGridTextColumn.ElementStyle>
+          <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+          </Style>
+        </DataGridTextColumn.ElementStyle>
+      </DataGridTextColumn>
+      <DataGridTextColumn Header="Volume" Binding="{Binding Path=Volume}">
+        <DataGridTextColumn.ElementStyle>
+          <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+          </Style>
+        </DataGridTextColumn.ElementStyle>
+      </DataGridTextColumn>
+    </DataGrid.Columns>
+  </DataGrid>
+</UserControl>
