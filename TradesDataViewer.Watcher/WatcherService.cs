@@ -11,11 +11,13 @@ namespace TradesDataViewer.Watcher
     using System.Linq;
     using System.Threading;
 
+    using Microsoft.Practices.Prism.Logging;
+
     using TradesDataViewer.Contracts;
     using TradesDataViewer.Watcher.Core;
 
-    using XPath = System.IO.Path;
     using XFile = System.IO.File;
+    using XPath = System.IO.Path;
 
     /// <summary>The watcher service.</summary>
     [Export, PartCreationPolicy(CreationPolicy.Shared)]
@@ -27,6 +29,9 @@ namespace TradesDataViewer.Watcher
         /// <summary>The loader manager.</summary>
         private readonly ITradeDataLoaderManager loaderManager;
 
+        /// <summary>The logger.</summary>
+        private readonly ILoggerFacade logger;
+
         /// <summary>Initializes a new instance of the <see cref="WatcherService"/> class.</summary>
         /// <param name="application">The application.</param>
         /// <param name="loaderManager">The loader manager.</param>
@@ -35,6 +40,7 @@ namespace TradesDataViewer.Watcher
         {
             this.application = application;
             this.loaderManager = loaderManager;
+            this.logger = this.application.Prism.LoggerFacade;
 
             this.Watcher = new FileSystemWatcher();
             this.Timer = new PollingTimer(this.Execute);
@@ -71,15 +77,23 @@ namespace TradesDataViewer.Watcher
 
         private void HandleFile(string file)
         {
-            var loader = this.loaderManager.GetTradeDataLoader(XPath.GetExtension(file));
-            if (loader != null)
+            try
             {
-                using (var stream = XFile.OpenRead(file))
+                var loader = this.loaderManager.GetTradeDataLoader(XPath.GetExtension(file));
+                if (loader != null)
                 {
-                    var trades = loader.Read(stream).ToArray();
-                    var channel = this.application.TradeDataPushedChannel;
-                    channel.Publish(trades);
+                    using (var stream = XFile.OpenRead(file))
+                    {
+                        var trades = loader.Read(stream).ToArray();
+                        var channel = this.application.TradeDataPushedChannel;
+                        channel.Publish(trades);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                var message = string.Format("Cannot read the '{0}' file. {1}", file, ex);
+                this.logger.Log(message, Category.Exception, Priority.High);
             }
         }
     }

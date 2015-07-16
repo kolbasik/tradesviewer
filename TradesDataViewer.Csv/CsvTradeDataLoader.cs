@@ -8,6 +8,7 @@ namespace TradesDataViewer.Csv
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    using System.Globalization;
     using System.IO;
     using System.Text;
 
@@ -17,12 +18,10 @@ namespace TradesDataViewer.Csv
     [Export(typeof(ITradeDataLoader))]
     public class CsvTradeDataLoader : ITradeDataLoader
     {
-        /// <summary>
-        ///     Gets the extension.
-        /// </summary>
-        /// <value>
-        ///     The extension.
-        /// </value>
+        private readonly CultureInfo culture = CultureInfo.InvariantCulture;
+
+        /// <summary>Gets the extension.</summary>
+        /// <value>The extension.</value>
         public string Extension
         {
             get
@@ -42,12 +41,12 @@ namespace TradesDataViewer.Csv
             {
                 var node = line.Split(',');
                 var trade = new TradeData();
-                trade.Date = DateTime.Parse(node[0]);
-                trade.Open = decimal.Parse(node[1]);
-                trade.High = decimal.Parse(node[2]);
-                trade.Low = decimal.Parse(node[3]);
-                trade.Close = decimal.Parse(node[4]);
-                trade.Volume = decimal.Parse(node[5]);
+                trade.Date = DateTime.Parse(node[0], this.culture);
+                trade.Open = decimal.Parse(node[1], this.culture);
+                trade.High = decimal.Parse(node[2], this.culture);
+                trade.Low = decimal.Parse(node[3], this.culture);
+                trade.Close = decimal.Parse(node[4], this.culture);
+                trade.Volume = decimal.Parse(node[5], this.culture);
                 yield return trade;
             }
         }

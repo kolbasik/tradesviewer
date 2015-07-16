@@ -8,6 +8,7 @@ namespace TradesDataViewer.Xml
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
+    using System.Globalization;
     using System.IO;
     using System.Xml.Linq;
     using System.Xml.XPath;
@@ -18,6 +19,8 @@ namespace TradesDataViewer.Xml
     [Export(typeof(ITradeDataLoader))]
     public class XmlTradeDataLoader : ITradeDataLoader
     {
+        private readonly CultureInfo culture = CultureInfo.InvariantCulture;
+
         /// <summary>
         ///     Gets the extension.
         /// </summary>
@@ -42,12 +45,12 @@ namespace TradesDataViewer.Xml
             foreach (var node in nodes)
             {
                 var trade = new TradeData();
-                trade.Date = DateTime.Parse(node.Attribute("date").Value);
-                trade.Open = decimal.Parse(node.Attribute("open").Value);
-                trade.High = decimal.Parse(node.Attribute("high").Value);
-                trade.Low = decimal.Parse(node.Attribute("low").Value);
-                trade.Close = decimal.Parse(node.Attribute("close").Value);
-                trade.Volume = decimal.Parse(node.Attribute("volume").Value);
+                trade.Date = DateTime.Parse(node.Attribute("date").Value, this.culture);
+                trade.Open = decimal.Parse(node.Attribute("open").Value, this.culture);
+                trade.High = decimal.Parse(node.Attribute("high").Value, this.culture);
+                trade.Low = decimal.Parse(node.Attribute("low").Value, this.culture);
+                trade.Close = decimal.Parse(node.Attribute("close").Value, this.culture);
+                trade.Volume = decimal.Parse(node.Attribute("volume").Value, this.culture);
                 yield return trade;
             }
         }
