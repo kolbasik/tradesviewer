@@ -4,11 +4,13 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TradesDataViewer.Contracts
+namespace TradesDataViewer.Core
 {
     using System.Collections.Generic;
     using System.ComponentModel.Composition;
     using System.Linq;
+
+    using TradesDataViewer.Contracts;
 
     /// <summary>The trade data loader manager.</summary>
     [Export(typeof(ITradeDataLoaderManager)), PartCreationPolicy(CreationPolicy.Shared)]

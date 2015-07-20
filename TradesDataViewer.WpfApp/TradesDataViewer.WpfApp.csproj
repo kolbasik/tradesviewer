@@ -148,6 +148,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Monads\Monads.csproj">
+      <Project>{0700937B-C348-4627-9781-90262E48E853}</Project>
+      <Name>Monads</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TradesDataViewer.Contracts\TradesDataViewer.Contracts.csproj">
       <Project>{88EF9967-4142-48F0-9888-109355CB71D1}</Project>
       <Name>TradesDataViewer.Contracts</Name>

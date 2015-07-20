@@ -14,5 +14,8 @@ namespace TradesDataViewer.Contracts
 
         /// <summary>Gets the trade data pushed channel.</summary>
         TradeDataPushedEvent TradeDataPushedChannel { get; }
+
+        /// <summary>Gets the notification channel.</summary>
+        NotificationChannel NotificationChannel { get; }
     }
 }

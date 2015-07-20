@@ -74,6 +74,8 @@
     <Compile Include="IPrism.cs" />
     <Compile Include="ITradeDataLoader.cs" />
     <Compile Include="ITradeDataLoaderManager.cs" />
+    <Compile Include="Notification.cs" />
+    <Compile Include="NotificationChannel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TradeData.cs" />
     <Compile Include="TradeDataPushedEvent.cs" />

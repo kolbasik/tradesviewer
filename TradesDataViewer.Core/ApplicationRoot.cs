@@ -3,9 +3,11 @@
 //   The application root.
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace TradesDataViewer.Contracts
+namespace TradesDataViewer.Core
 {
     using System.ComponentModel.Composition;
+
+    using TradesDataViewer.Contracts;
 
     /// <summary>The application root.</summary>
     [Export(typeof(IApplicationRoot))]
@@ -19,6 +21,7 @@ namespace TradesDataViewer.Contracts
         {
             this.Prism = prism;
             this.TradeDataPushedChannel = this.Prism.EventAggregator.GetEvent<TradeDataPushedEvent>();
+            this.NotificationChannel = this.Prism.EventAggregator.GetEvent<NotificationChannel>();
         }
 
         /// <summary>Gets the prism.</summary>
@@ -26,5 +29,8 @@ namespace TradesDataViewer.Contracts
 
         /// <summary>Gets the trade data pushed channel.</summary>
         public TradeDataPushedEvent TradeDataPushedChannel { get; private set; }
+
+        /// <summary>Gets the notification channel.</summary>
+        public NotificationChannel NotificationChannel { get; private set; }
     }
 }

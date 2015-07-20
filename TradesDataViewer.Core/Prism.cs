@@ -4,7 +4,7 @@
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace TradesDataViewer.Contracts
+namespace TradesDataViewer.Core
 {
     using System.ComponentModel.Composition;
 
@@ -12,6 +12,8 @@ namespace TradesDataViewer.Contracts
     using Microsoft.Practices.Prism.PubSubEvents;
     using Microsoft.Practices.Prism.Regions;
     using Microsoft.Practices.ServiceLocation;
+
+    using TradesDataViewer.Contracts;
 
     /// <summary>The prism.</summary>
     [Export(typeof(IPrism))]
