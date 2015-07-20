@@ -28,7 +28,7 @@
             [DebuggerStepThrough]
             get
             {
-                throw new NotSupportedException("Option does not have a value.");
+                throw new NullReferenceException("Option does not have a value.");
             }
         }
 

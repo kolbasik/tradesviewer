@@ -51,13 +51,13 @@
         }
 
         [Fact]
-        public void Value_Always_RaisesException()
+        public void Value_Always_RaisesNullReferenceException()
         {
             // arrange
             var sut = NoneOption<object>.Return();
 
             // act && assert
-            Assert.Throws<NotSupportedException>(() => sut.Value);
+            Assert.Throws<NullReferenceException>(() => sut.Value);
         }
 
         [Theory]

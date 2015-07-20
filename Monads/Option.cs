@@ -21,31 +21,29 @@
 
         public abstract T Value { get; }
 
-        public abstract bool Equals(Option<T> other);
+        public override bool Equals(object obj)
+        {
+            if (obj is Option<T>)
+            {
+                return this.Equals((Option<T>)obj);
+            }
+
+            if (obj is T)
+            {
+                return this.Equals((T)obj);
+            }
+
+            return false;
+        }
+
+        public virtual bool Equals(Option<T> other)
+        {
+            return this.IsSome && other != null && other.Equals(this.Value);
+        }
 
         public virtual bool Equals(T other)
         {
             return this.IsSome && object.Equals(this.Value, other);
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (object.ReferenceEquals(null, obj))
-            {
-                return false;
-            }
-
-            if (object.ReferenceEquals(this, obj))
-            {
-                return true;
-            }
-
-            if (obj.GetType() != this.GetType())
-            {
-                return false;
-            }
-
-            return this.Equals((Option<T>)obj);
         }
 
         public override int GetHashCode()

@@ -10,14 +10,29 @@ namespace Monads
 
     public static class Maybe
     {
-        public static Option<TValue> AsOption<TValue>(this TValue value) where TValue : class
+        public static Option<TValue> AsOption<TValue>(this TValue value)
         {
-            return value == null ? Option.None<TValue>() : Option.Some(value);
+            return object.Equals(value, default(TValue)) ? Option.None<TValue>() : Option.Some(value);
         }
 
-        public static Option<TResult> Bind<TInput, TResult>(this Option<TInput> option, Func<TInput, TResult> map)
+        public static Option<TResult> Bind<TInput, TResult>(this Option<TInput> option, Func<TInput, Option<TResult>> binder)
         {
-            return option.IsSome ? Option.Some(map(option.Value)) : Option.None<TResult>();
+            return option.IsSome ? binder(option.Value) : Option.None<TResult>();
+        }
+
+        public static Option<TResult> Map<TInput, TResult>(this Option<TInput> option, Func<TInput, TResult> mapper)
+        {
+            return option.IsSome ? Option.Some(mapper(option.Value)) : Option.None<TResult>();
+        }
+
+        public static Option<TValue> Do<TValue>(this Option<TValue> option, Action<TValue> action)
+        {
+            if (option.IsSome)
+            {
+                action(option.Value);
+            }
+
+            return option;
         }
 
         public static TValue Return<TValue>(this Option<TValue> option)

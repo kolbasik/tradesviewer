@@ -26,11 +26,6 @@
             get { return this.value; }
         }
 
-        public override bool Equals(Option<TValue> other)
-        {
-            return other != null && other.IsSome && other.Value.Equals(this.Value);
-        }
-
         public override string ToString()
         {
             return string.Concat("Some(", Convert.ToString(this.value, CultureInfo.InvariantCulture), ")");
